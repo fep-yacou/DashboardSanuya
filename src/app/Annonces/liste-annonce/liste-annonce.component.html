@@ -1,0 +1,7 @@
+<app-header></app-header>
+<!-- <app-side-menu></app-side-menu> -->
+<p>liste-annonce works!</p>
+<div *ngFor="let a of annoce">
+    <img src="{{photo}} + {{a.id_annonce}}">
+    <h4>{{a.description}}</h4>
+</div>
