@@ -24,4 +24,5 @@ export class ListeAnnonceComponent implements OnInit {
       
     })
   }
+  
 }

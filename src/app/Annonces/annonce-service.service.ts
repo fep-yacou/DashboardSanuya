@@ -22,7 +22,7 @@ export class AnnonceServiceService {
       }
       //Modifier Annonce
       updateAnnonce(id: any, part:any){
-        return this.http.put(this.url + '/modifierAnnonce/${id}', part);
+        return this.http.put(this.url + '/modifierAnnonce/' + id, part);
       }
       //Details Annonce
       detailAnnonce(id_participant:any){

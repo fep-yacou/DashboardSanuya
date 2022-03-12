@@ -1,67 +1,84 @@
+<app-header></app-header>
+<app-side-menu></app-side-menu>
+<div class="page-wrapper">
+    <div class="page-breadcrumb bg-white">
+        <div class="row align-items-center sous-header">
+            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">AJOUTER UNE ANNONCE</h4>
+            </div>
+            <div class="col-lg-6 col-sm-8 col-md-8 col-xs-12">
+                <div class="d-md-flex"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+    <div class="row justify-content-center" style="margin: 0 auto;">
 
-<section class="wrapper">
-    <h3>Ajouter un déchet</h3>
-    <div class="row " >
-        <div class="col-lg-12">
-            <div class="form-panel" style="padding: 3%;">
-                <form [formGroup]="formulaire" (ngSubmit)="submitForm()" novalidate class="form-horizontal style-form">
-                <div class="form-group">
+        <div class="col-lg-3 col-xlg-3 col-md-12"></div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-6 col-xlg-3 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="formulaire" (ngSubmit)="submitForm()" class="form-horizontal form-material">
 
-                        <label class="control-label col-md-2">Image du déchet</label>
-                        <div class="col-md-3">
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                    <img src="" alt="" />
-                                </div>
-                                <div class="fileupload-preview fileupload-exists thumbnail"
-                                    style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                <div>
-                                    <span class="btn btn-theme02 btn-file">
-                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Choisir une
-                                            image</span>
-                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer</span>
-                                        <input type="file" value="" name="photo" (change)="imgSelect($event)"   required class="default" />
-                                    </span>
-                                    <a href="#" class="btn btn-theme04 fileupload-exists"
-                                        data-dismiss="fileupload"
-                                        style="margin-left: 1%;"
-                                        ><i class="fa fa-trash-o"></i> Supprimer</a>
+                            <div class="form-group mb-4">
+                                <label class="control-label col-md-4">Photo de l'annonce</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="file" value="" name="photo" (change)="imgSelect($event)" />
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="form-group mb-4">
+                                <label for="example-TYPE" class="col-md-12 p-0">Description</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="text" placeholder="Description du dechet"
+                                    class="form-control p-0 border-0" type="description" value="" name="description" formControlName="description" >
+                                </div>
+                                <!-- <p *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert">
+                                    <b *ngIf="prenom.errors?.['required']">
+                                          Le prénom est obligatoire !
+                                    </b>
+                                    <b *ngIf="nom.errors?.['pattern']">
+                                        Le prénom doit être composé que des lettres !
+                                    </b>
+                                  </p> -->
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="categorie" class="col-md-12 p-0">Choisir une categorie</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <select formControlName="categorie">
+                                        <option *ngFor="let categorie of listeCategorie" value="{{categorie.idcat}}">{{categorie.type}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group mb-4">
+                                <label for="example-TYPE" class="col-md-12 p-0">Ville</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="text" placeholder="Saisissez votre ville"
+                                    class="form-control p-0 border-0" type="ville" value="" name="ville" formControlName="ville" >
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="example-TYPE" class="col-md-12 p-0">Quartier</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="text" placeholder="Saisissez votre quartier"
+                                    class="form-control p-0 border-0" type="quartier" value="" name="quartier" formControlName="quartier" >
+                                </div>
+                            </div> -->
 
+                            <div class="form-group mb-4">
+                                <div class="col-sm-12 align-button">
+                                    <button class="btn btn-warning" type="submit">Ajouter</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="form-group">
-                        <div>
-                        <label class="control-label col-md-2">Description</label>
-                        <div class="col-md-3 col-xs-11 ">
-                            <input class="form-control form-control-inline input-medium " size="16"
-                                type="text" value="" name="description" formControlName="description"  required>
-                        </div>
-                    </div>
-                        <label class="control-label col-md-2">Categorie</label>
-                        <div class="col-md-3 col-xs-11">
-                            <input class="form-control form-control-inline input-medium " size="16"
-                                type="text" value="" name="categorie" formControlName="categorie"   required>
-                        </div>
-                        <label class="control-label col-md-2">Localisation</label>
-                        <div class="col-md-3 col-xs-11">
-                            <input class="form-control form-control-inline input-medium " size="16"
-                                type="text" value="" name="geolocalisation" formControlName="geolocalisation"   required>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-theme btn-file" [disabled]="" >Enregistrer</button>
-                </form>
+                </div>
             </div>
-            <!-- /form-panel -->
-        </div>
-        <!-- /col-lg-12 -->
+            <div class="col-lg-3 col-xlg-3 col-md-12"></div>
+
     </div>
-</section>
-<!-- /wrapper -->
-
-
-
+</div>
+</div>

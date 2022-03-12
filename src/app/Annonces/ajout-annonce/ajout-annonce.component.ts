@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnonceServiceService } from '../annonce-service.service';
+import { CategorieServiceService } from 'src/app/Categorie/categorie-service.service';
 
 
 @Component({
@@ -10,25 +11,25 @@ import { AnnonceServiceService } from '../annonce-service.service';
   styleUrls: ['./ajout-annonce.component.scss']
 })
 export class AjoutAnnonceComponent implements OnInit {
-
-
-  allCategory: any;
+  listeCategorie: any;
   public imgfile: any = File;
-  public livrefile: any = File;
   submitted = false;
   formulaire: FormGroup;
   user: any;
 
   constructor(
+    public categorieService: CategorieServiceService,
     public service: AnnonceServiceService,
     public router: Router,
     public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.listerCategorie();
+
     this.formulaire = this.formBuilder.group({
       description: ['', Validators.required],
       categorie: ['', Validators.required],
-      geolocalisation: ['']
+      // geolocalisation: ['']
     });
     this.user = JSON.parse(localStorage.getItem("userData"));
     console.log(this.user);
@@ -54,12 +55,15 @@ export class AjoutAnnonceComponent implements OnInit {
 
     let description = this.formulaire.value['description'];
     let categorie = this.formulaire.value['categorie'];
-    let geolocalisation = this.formulaire.value['geolocalisation'];
+    // let geolocalisation = this.formulaire.value['geolocalisation'];
 
     this.service.ajoutAnnonce(file).subscribe((data) => {
         data.description = description,
-        data.categorie = categorie,
-        data.geolocalisation = geolocalisation
+        // console.log("Categorie : ", categorie);
+        data.categorie = {
+          idcat: categorie
+        }
+        // data.geolocalisation = geolocalisation
         if(this.user.type == 'SimpleUtilisateur'){
           data.utilisateur = this.user
         }
@@ -78,8 +82,13 @@ export class AjoutAnnonceComponent implements OnInit {
         console.log("dataUpdate============", data);
       })
     })
+  }
 
-
+  listerCategorie(){
+    this.categorieService.listeCategorie().subscribe((dataa)=>{
+      console.log(dataa);
+      return this.listeCategorie=dataa;
+    })
   }
 
 }
